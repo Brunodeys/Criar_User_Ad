@@ -72,7 +72,7 @@ def gerar_login_email(nome_completo):
 
     return login, email
 
-def criar_usuario_ad(nome_completo, usuario_modelo, senha_padrao="Tsea@2025", simular=True):
+def criar_usuario_ad(nome_completo, usuario_modelo, senha_padrao="Mudar@2025", simular=True):
     login_novo, email = gerar_login_email(nome_completo)
     nome, sobrenome = nome_completo.strip().split(" ", 1)
 
@@ -87,18 +87,13 @@ def criar_usuario_ad(nome_completo, usuario_modelo, senha_padrao="Tsea@2025", si
         -Path $modelo.DistinguishedName.Substring($modelo.DistinguishedName.IndexOf(",")+1) `
         -AccountPassword (ConvertTo-SecureString "{senha_padrao}" -AsPlainText -Force) `
         -Enabled $true
+        -ChangePasswordAtLogon $true
 
     $grupos = Get-ADUser "{usuario_modelo}" -Properties MemberOf | Select-Object -ExpandProperty MemberOf
     foreach ($grupo in $grupos) {{
         Add-ADGroupMember -Identity $grupo -Members "{login_novo}"
     }}
     '''
-
-    print("\n DADOS GERADOS DO COLABORADOR:")
-    print(f"Nome completo: {nome_completo}")
-    print(f"Login sugerido: {login_novo}")
-    print(f"E-mail sugerido: {email}")
-    print(f"Senha padrão: {senha_padrao}")
     print(f"\n--- COMANDO POWERHELL ---\n{comando}\n")
 
     if simular:
@@ -152,7 +147,7 @@ if __name__ == "__main__":
         print(f"Usuário: {nome_completo}")
         print(f"Login: {login_gerado}")
         print(f"E-mail: {email_gerado}")
-        print(f"Senha: Tsea@2025")
+        print(f"Senha: Mudar@2025")
 
         continuar = input("\nDeseja cadastrar outro usuário? [S/N]: ").strip().lower()
         if continuar != "s":
