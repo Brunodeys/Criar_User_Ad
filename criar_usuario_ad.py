@@ -43,7 +43,7 @@ def gerar_login_email(nome_completo):
             if not login_existe_ad(login):
                 break
 
-    dominio = "@tseaenergia.com.br"
+    dominio = "@emailempresa.com.br"
     email_base = f"{primeiro_nome}.{ultimo_nome_real}"
     email = f"{email_base}{dominio}"
 
