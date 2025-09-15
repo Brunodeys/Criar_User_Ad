@@ -100,17 +100,17 @@ def criar_usuario_ad(nome_completo, usuario_modelo, senha_padrao="Mudar@2025", s
         print("🔍 MODO SIMULAÇÃO ATIVO: Nenhum usuário foi criado.")
         return login_novo, email
 
-    confirmar = input("❗ Confirmar criação do usuário? [S/N]: ").strip().lower()
+    confirmar = input(" Confirmar criação do usuário? [S/N]: ").strip().lower()
     if confirmar != "s":
-        print("🚫 Criação cancelada pelo usuário.")
+        print(" Criação cancelada pelo usuário.")
         return login_novo, email
 
     resultado = subprocess.run(["powershell", "-Command", comando], capture_output=True, text=True)
 
     if resultado.returncode == 0:
-        print(f"\n✅ Usuário criado com sucesso!")
+        print(f"\n Usuário criado com sucesso!")
     else:
-        print("\n❌ Erro ao criar usuário:\n", resultado.stderr)
+        print("\n Erro ao criar usuário:\n", resultado.stderr)
 
     return login_novo, email
 
@@ -151,5 +151,6 @@ if __name__ == "__main__":
 
         continuar = input("\nDeseja cadastrar outro usuário? [S/N]: ").strip().lower()
         if continuar != "s":
-            print("✅ Encerrando o programa. Até mais!")
+            print(" Encerrando o programa. Até mais!")
             break
+
